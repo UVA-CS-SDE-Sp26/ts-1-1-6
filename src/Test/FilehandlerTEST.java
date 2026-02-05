@@ -17,9 +17,21 @@ class FilehandlerTEST {
         assertEquals("This is the text inside 123_That'sClassified.txt!", filehandler.readOrListFiles(0));
     }
 
+    @Test
+    void TestInputingValidIndexBeforeRunningTheList(){
+        FileHandler filehandler = new FileHandler();
+        assert()
+    }
 
     @Test
-    void readFileNames(){}
+    void validIndexWithValidIndex(){}
+
+    @Test
+    void validIndexWithInvalidIndex(){}
+
+    @Test
+    void validIndexWithValidIntNotCorespondingToATextFile(){
+    }
 
     @Test
     void readFile(){
@@ -31,14 +43,7 @@ class FilehandlerTEST {
     void checkIfDeciphered(){
 
     }
-    @Test
-    void SendCorrectFileToBeDeciphered(){
-    }
 
-    @Test
-    void returnSelectedFile(){
-
-    }
     @Test
     void TestWithInvalidIndex(){}
 
@@ -55,10 +60,10 @@ class FilehandlerTEST {
     void TestArrayOfFileNames(){}
 
     @Test
-    void TestweirdFileNames(){}
+    void TestWeirdFileNames(){}
 
     @Test
-    void TestIdDataFolderIsMissingOREmpty(){}
+    void TestIfDataFolderIsMissingOREmpty(){}
 
 
 }
