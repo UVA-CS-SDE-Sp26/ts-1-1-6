@@ -2,5 +2,7 @@
  * Commmand Line Utility
  */
 public class TopSecret {
-    System.out.println("bob");
+    public static void main(String[] args) {
+        System.out.println("bob");
+    }
 }
