@@ -21,6 +21,7 @@ public class Filehandler {
 
     }
     private boolean validIndex(int indexOfFile){
+        //todo: check valid index included in NamesOfFiles Array
         return true;
     }
 
