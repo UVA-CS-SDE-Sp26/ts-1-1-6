@@ -1,0 +1,42 @@
+Cipher Module Design
+_______________________________
+Purpose
+-------
+To implement deciphering for ciphered mission text files. This module accepts a ciphered string and returns readable (deciphered) text.
+It supports:
+1) A default cipher key stored at ciphers/key.txt
+2) An alternate key path supplied as the program's second command-line argument
+
+This module does NOT read mission data files from /data. That is handled by the FileHandler module.
+
+Folder Structure
+----------------
+Project root:
+- ciphers/
+    - key.txt (default cipher key)
+- data/ (mission text files)
+
+Key File Format (key.txt)
+-------------------------
+The key file contains exactly two required lines:
+1) Plaintext alphabet (the "actual letters")
+2) Cipher alphabet (the cipher match for each plaintext letter)
+
+Ex:
+Line 1 - ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Line 2 - QWERTYUIOPASDFGHJKLZXCVBNM
+
+Meaning:
+If line 1 'A' corresponds to line 2 'Q', then when deciphering we convert 'Q' -> 'A'
+
+Steps
+-----
+1) Read key file lines:
+   plain = line1
+   cipher = line2
+2) Build a mapping from cipher character to plaintext character:
+   cipherToPlain[cipher[i]] = plain[i]
+3) For each character ch in the input text:
+   - If ch is found in cipherToPlain, replace it with
+
+
