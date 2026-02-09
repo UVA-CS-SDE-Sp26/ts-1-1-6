@@ -21,7 +21,6 @@ up to two arguments, which determine unique feedback from the software. The foll
         (Displays to the user the contents of filea.txt deciphered according to the key fghijkl...890abcde)
 
 PSEUDOCODE
------
 
 if no argument passed:
     retrieve information from Team Member C using some method like getFileList()
