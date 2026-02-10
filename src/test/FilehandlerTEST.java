@@ -14,7 +14,7 @@ class FilehandlerTEST {
     @Test
     void integerArgumentsGiven(){
         FileHandler filehandler = new FileHandler();
-        assertEquals("This is the text inside 123_That'sClassified.txt!", filehandler.readOrListFiles(0));
+        assertEquals("This is the text inside 123_That'sClassified.txt!", filehandler.readFile(0));
     }
 
     @Test

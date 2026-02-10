@@ -1,0 +1,92 @@
+Description of goal:
+
+
+The program should expect files in a folder named data (in the same directory of the program, or in the root of your project folder.) When a request for a file is received, this part of the program will return the file contents. This part of the program should handle all the direct access to files.
+
+
+
+Goals:
+	Return list of files:
+		Look in data folder
+
+		Add names to an ArrayList<String>
+
+		Return:
+			ArrayList<String>
+listFiles()
+	Function: When run return the list of file names in the data folder.
+		○ Read the file names
+		○ Add the file names to an ArrayList<String>
+		○ Return the arraylist of names
+	Return ArrayList<String>
+
+
+
+
+readFile(int Index)
+	Function: Take in index of file you want to print from the array of names.
+		○ Take in file from data folder in root
+
+		○ Send String to decipher functions
+
+		○ Return the deciphered string
+
+		Return:
+			String
+
+Filehandler
+------------------
+listFiles(); //arrayList<Strings>
+readFile(int indexOfFile); //string
+------------------
+
+Filehandler pseudocode:
+
+
+public  class FileHandler {
+
+
+private ArrayList<String> NamesOfFiles;
+
+//if blank arguments it'll return an array of file names
+Public ArrayList<String> listFiles(){
+	Read the file names from the data folder
+	Put one file name string per index
+
+}
+
+
+//if given index of file it will return the text from inside of that file as a string
+Public String readFiles(int Index){
+
+if Valid Index {
+
+	String textFromFileToReurn= Look in NamesOfFiles and file corresponding to the index
+
+	//Take textFromFileToReturn and send to decipher
+
+	textFromFileToReturn = //give text to decipherer
+	textFromFileToReturn = read the deciphered file
+
+
+	Return: TextFromFileToReturn
+}
+else {
+	Return "Invalid Index"
+	}
+
+ }
+}
+
+
+
+
+Private boolean validIndex(int index){
+
+	Verify that int is valid
+
+	Compare index to NamesOfFiles's length determine if the index coresponds to a valid file's index
+
+	Return true //if valid
+	Return false //if not
+}
