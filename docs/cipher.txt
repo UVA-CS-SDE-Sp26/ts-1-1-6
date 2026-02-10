@@ -37,6 +37,69 @@ Steps
 2) Build a mapping from cipher character to plaintext character:
    cipherToPlain[cipher[i]] = plain[i]
 3) For each character ch in the input text:
-   - If ch is found in cipherToPlain, replace it with
+   - If ch is found in cipherToPlain, replace it with cipherToPlain[ch]
+   - Otherwise leave ch unchanged
 
+Pseudocode
+----------
+FUNCTION decipher(cipherText, optionalKeyPath):
+    IF cipherText IS null:
+        cipherText = ""
+
+    // choose key path
+    IF optionalKeyPath IS null OR optionalKeyPath IS blank:
+        keyPath = "ciphers/key.txt"
+    ELSE:
+        keyPath = optionalKeyPath
+
+    mapping = loadAndValidateKey(keyPath)   // returns dictionary cipherChar -> plainChar
+
+    output = empty string builder
+
+    FOR EACH character ch IN cipherText:
+        IF mapping CONTAINS ch:
+            output.append(mapping[ch])
+        ELSE IF ch IS lowercase AND mapping CONTAINS uppercase(ch):
+            // case-preserving fallback for uppercase-only keys
+            plainUpper = mapping[uppercase(ch)]
+            output.append(lowercase(plainUpper))
+        ELSE:
+            output.append(ch)  // punctuation, spaces, digits unchanged
+
+    RETURN output.toString()
+
+
+FUNCTION loadAndValidateKey(keyPath):
+    IF file at keyPath DOES NOT exist OR cannot be read:
+        THROW IllegalArgumentException("Cipher key file not found or unreadable")
+
+    lines = read all lines from keyPath
+
+    IF number of lines < 2:
+        THROW IllegalArgumentException("Cipher key must contain at least 2 lines")
+
+    plainLine  = lines[0]
+    cipherLine = lines[1]
+
+    IF plainLine IS empty OR cipherLine IS empty:
+        THROW IllegalArgumentException("Cipher key lines must be non-empty")
+
+    IF length(plainLine) != length(cipherLine):
+        THROW IllegalArgumentException("Cipher key lines must be the same length")
+
+    // validate cipher uniqueness
+    seen = empty set
+    FOR EACH character c IN cipherLine:
+        IF c IN seen:
+            THROW IllegalArgumentException("Duplicate cipher character found")
+        ADD c TO seen
+
+    // build mapping cipher -> plain
+    mapping = empty dictionary<Character, Character>
+    FOR i FROM 0 TO length(plainLine) - 1:
+        cipherChar = cipherLine[i]
+        plainChar  = plainLine[i]
+        mapping[cipherChar] = plainChar
+
+    RETURN mapping
 
