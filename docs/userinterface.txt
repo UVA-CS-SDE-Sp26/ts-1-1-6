@@ -1,6 +1,9 @@
 TopSecret User Interface
 -----
 
+02/13/2026
+Tristan Hernandez (A)
+
 The command-line user interface is the point of entry for the software. The user is able to run the software by providing
 up to two arguments, which determine unique feedback from the software. The following use cases are expected.
 

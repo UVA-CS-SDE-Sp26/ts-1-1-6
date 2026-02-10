@@ -3,6 +3,7 @@
  */
 public class TopSecret {
     public static void main(String[] args) {
-        System.out.println("bob");
+        UserInterface userInterface = new UserInterface(args);
+        System.out.println(userInterface.getReturnMessage());
     }
 }
