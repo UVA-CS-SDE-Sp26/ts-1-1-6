@@ -14,7 +14,6 @@ public class Filehandler {
     }
     public String readFile(int indexOfFile){
         if(validIndex(indexOfFile)){
-
             //todo: add logic to read a specific file
             String TextFromFileToReturn = "";
             return TextFromFileToReturn;
