@@ -1,13 +1,18 @@
+/*
+*File handler
+*/
+import java.util.*;
+
 public class Filehandler {
 
-    private String[] NamesOfFiles;
+    private ArrayList<String> NamesOfFiles;
 
 
-    public String[] readOrListFiles(){
+    public ArrayList<String> listFiles(){
         //Todo: add logic to read the file names in data
         return NamesOfFiles;
     }
-    public String readOrListFiles(int indexOfFile){
+    public String readFile(int indexOfFile){
         if(validIndex(indexOfFile)){
 
             //todo: add logic to read a specific file
@@ -15,7 +20,7 @@ public class Filehandler {
             return TextFromFileToReturn;
         }
         else{
-            readOrListFiles();
+            listFiles();
             return null;
         }
 

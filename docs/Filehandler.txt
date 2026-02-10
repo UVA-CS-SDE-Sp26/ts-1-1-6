@@ -85,7 +85,7 @@ Private boolean validIndex(int index){
 
 	Verify that int is valid
 
-	Compare index to NamesOfFiles's length determine if the index coresponds to a valid file's index
+	Compare index to NamesOfFiles's length determine if the index corresponds to a valid file's index
 
 	Return true //if valid
 	Return false //if not
