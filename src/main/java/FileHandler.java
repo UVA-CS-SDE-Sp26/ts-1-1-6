@@ -3,7 +3,7 @@
 */
 import java.util.*;
 
-public class Filehandler {
+public class FileHandler {
 
     private ArrayList<String> NamesOfFiles;
 

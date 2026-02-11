@@ -3,7 +3,8 @@
  */
 public class TopSecret {
     public static void main(String[] args) {
-        UserInterface userInterface = new UserInterface(args);
+        ProgramController programController = new ProgramController();
+        UserInterface userInterface = new UserInterface(args, programController);
         System.out.println(userInterface.getReturnMessage());
     }
 }

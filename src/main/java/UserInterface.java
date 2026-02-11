@@ -1,8 +1,9 @@
 
 public class UserInterface {
     private String[] args;
+    ProgramController programController;
 
-    public UserInterface(String[] args) {
+    public UserInterface(String[] args, ProgramController programController) {
         this.args = args;
     }
 
