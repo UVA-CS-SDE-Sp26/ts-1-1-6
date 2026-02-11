@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 
-class FilehandlerTEST {
+class FileHandlerTEST {
     String[] TestListOfFileNames = {"Document1.txt", "SuperSecretSpyDoc.txt", "123_That's_Classified!.txt", "For The President's Eyes Only.txt", "Ciphered.txt"}
 
     @Test

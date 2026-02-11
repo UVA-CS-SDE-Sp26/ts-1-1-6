@@ -34,13 +34,13 @@ readFile(int Index)
 		Return:
 			String
 
-Filehandler
+FileHandler
 ------------------
 listFiles(); //arrayList<Strings>
 readFile(int indexOfFile); //string
 ------------------
 
-Filehandler pseudocode:
+FileHandler pseudocode:
 
 
 public  class FileHandler {
