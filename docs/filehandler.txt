@@ -1,26 +1,18 @@
-TopSecret File Handler
-----
-
-02/13/2026
-
-Thomas Van Pelt (B)
+Description of goal:
 
 
-The file handler should expect files in a folder named data (in the same directory of the program, or in the root of your project folder.)
-When a request for a file is received, this part of the program will return the file contents.
-This part of the program should handle all the direct access to files.
+The program should expect files in a folder named data (in the same directory of the program, or in the root of your project folder.) When a request for a file is received, this part of the program will return the file contents. This part of the program should handle all the direct access to files.
 
 
-* Goals:
-	Read all necessary files
-	Return names of the list in the data file
-	Send the file to be deciphered
-	    give the decipher the default key from the file (only file handler can read files)
-	        As a string
 
+Goals:
+	Return list of files:
+		Look in data folder
 
-*FUNCTION DESCRIPTION:
+		Add names to an ArrayList<String>
 
+		Return:
+			ArrayList<String>
 listFiles()
 	Function: When run return the list of file names in the data folder.
 		○ Read the file names
@@ -29,31 +21,18 @@ listFiles()
 	Return ArrayList<String>
 
 
-readKey()
-    Function: When run returns the key and corresponding letter in the format:
-            abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
-            bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890a
-        ○ Read the key file
-        ○ Return it at a string
-    Return String
+
 
 readFile(int Index)
 	Function: Take in index of file you want to print from the array of names.
 		○ Take in file from data folder in root
 
-		○ Send String to decipher function
+		○ Send String to decipher functions
 
 		○ Return the deciphered string
 
 		Return:
 			String
-
-
-
-
-
-PSEUDOCODE
------
 
 Filehandler
 ------------------
@@ -61,13 +40,15 @@ listFiles(); //arrayList<Strings>
 readFile(int indexOfFile); //string
 ------------------
 
+Filehandler pseudocode:
+
 
 public  class FileHandler {
 
 
 private ArrayList<String> NamesOfFiles;
 
-//Called by Member C to return an ArrayList<String> with the
+//if blank arguments it'll return an array of file names
 Public ArrayList<String> listFiles(){
 	Read the file names from the data folder
 	Put one file name string per index
@@ -78,25 +59,29 @@ Public ArrayList<String> listFiles(){
 //if given index of file it will return the text from inside of that file as a string
 Public String readFiles(int Index){
 
-if (validIndex(index)) {
+if Valid Index {
 
-	String textFromFile = Look in NamesOfFiles and file corresponding to the index and save it as text
-	String decipheredText = cipher(textFromFile);
-	Return decipheredTex;
-    }
+	String textFromFileToReurn= Look in NamesOfFiles and file corresponding to the index
+
+	//Take textFromFileToReturn and send to decipher
+
+	textFromFileToReturn = //give text to decipherer
+	textFromFileToReturn = read the deciphered file
+
+
+	Return: TextFromFileToReturn
+}
 else {
 	Return "Invalid Index"
 	}
 
  }
 }
-readKey(){
-    String key = //read key text from the key file (from the cipher folder on root)
-    return key;
-}
 
 
-private boolean validIndex(int index){
+
+
+Private boolean validIndex(int index){
 
 	Verify that int is valid
 

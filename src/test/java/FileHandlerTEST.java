@@ -1,15 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.FileHandler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-//makes interface to test the methods that file handler uses
-interface MockCipher {
+interface MockCipher{
     String decipher(String cipherText, String optionalKeyPath);
 }
 
@@ -17,6 +16,9 @@ interface MockCipher {
 class FilehandlerTEST {
 
 
+    //makes interface to test the methods that file handler uses
+    @Mock
+    private MockCipher mockCipher;
     private String testResourcePath;
     private FileHandler fileHandler;
     private MockCipher mockCipher;
@@ -30,7 +32,7 @@ class FilehandlerTEST {
     void setUp() throws IOException {
         testResourcePath = "";
         //uses mock Cipher class and sets the test directory
-        fileHandler = new FileHandler(mockCipher, testResourcePath);
+        fileHandler = new FileHandler();
     }
 
     @Test
@@ -47,7 +49,7 @@ class FilehandlerTEST {
     @Test
     void TestInputtingValidIndexBeforeRunningTheList(){
         FileHandler filehandler = new FileHandler();
-        assert()
+        //assert();
     }
 
     @Test

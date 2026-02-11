@@ -8,6 +8,14 @@ public class FileHandler {
     private ArrayList<String> NamesOfFiles;
 
 
+    public FileHandler() {}
+
+    public String readKey(){
+        //Todo: add logic to read cipher key from key.txt
+        String key = "";
+        return key;
+    }
+
     public ArrayList<String> listFiles(){
         //Todo: add logic to read the file names in data
         return NamesOfFiles;
@@ -28,10 +36,6 @@ public class FileHandler {
         //todo: check valid index included in NamesOfFiles Array
         return true;
     }
-
-
-
-
 
 
 }
