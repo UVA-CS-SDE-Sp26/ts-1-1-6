@@ -38,7 +38,7 @@ public class FileHandler {
      * @return String
      */
     public String readKey(){
-        String path = fileRoot + "/cipher/key.txt";
+        String path = fileRoot + "/ciphers/key.txt";
         File keytxt = new File(path);
         if(!keytxt.exists()){
             return null;
