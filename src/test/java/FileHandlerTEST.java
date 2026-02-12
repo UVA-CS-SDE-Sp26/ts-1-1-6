@@ -152,13 +152,13 @@ class FilehandlerTEST {
     void testReadKeyReturnsNullOnMissingFile() {
         FileHandler invalidPath = new FileHandler("invalid/path/");
 
-        String result = invalidPath.readKey();
+        String result = invalidPath.readKey("");
         assertNull(result, "Should return null for missing files so the Cipher doesn't use an error message as a key.");
     }
 
     @Test
     void readKey() {
-        String key = fileHandler.readKey();
+        String key = fileHandler.readKey("");
 
         assertNotNull(key);
         assertFalse(key.isEmpty());
@@ -174,7 +174,7 @@ class FilehandlerTEST {
     //Updated test to match with cipher class's formating
     @Test
     void testReadKeyFormatForCipherCompatibility() {
-        String key = fileHandler.readKey();
+        String key = fileHandler.readKey("");
 
         assertNotNull(key, "readKey() should return null if missing, not crash");
 

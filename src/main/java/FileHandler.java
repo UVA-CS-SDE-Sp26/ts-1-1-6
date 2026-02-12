@@ -3,7 +3,6 @@
 */
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 
 public class FileHandler {
@@ -16,7 +15,7 @@ public class FileHandler {
 
     public FileHandler() {
         this.namesOfFiles = new ArrayList<>();
-        this.fileRoot = "";
+        this.fileRoot = System.getProperty("user.dir");
         //fills the namesOfFiles arrayList to avoid error about read file called first
         listFiles();
     }
@@ -34,11 +33,15 @@ public class FileHandler {
 
 
     /**
+     * Takes in path to key's file
      * Reads the default key from /ciphers/key.txt
      * @return String
      */
-    public String readKey(){
-        String path = fileRoot + "/ciphers/key.txt";
+    public String readKey(String path){
+        if(path.isEmpty()){
+            path = fileRoot + "/ciphers/key.txt";
+        }
+
         File keytxt = new File(path);
         if(!keytxt.exists()){
             return null;
@@ -53,7 +56,7 @@ public class FileHandler {
      */
     public ArrayList<String> listFiles(){
         String folderPath = fileRoot + "/data/";
-        File folder = new File("data");
+        File folder = new File(folderPath);
         File[] listOfFiles = folder.listFiles();
 
         namesOfFiles.clear();

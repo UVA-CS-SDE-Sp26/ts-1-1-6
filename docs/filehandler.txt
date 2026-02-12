@@ -40,7 +40,7 @@ Filehandler
 
 +listFiles(); //arrayList<Strings>
 +readFile(int indexOfFile); //string
-+readKey(); //string //default key
++readKey(String path); //string
 -validIndex(int index); //boolean
 ------------------
 
@@ -82,14 +82,18 @@ else {
  }
 }
 
-Public readKey(){
-    //read cipher key at default file
+
+//*****Update*****
+Public readKey(String path){
+    //read cipher key at path given by the user
+    //check for null or "" path and return default key
     Return String
 }
 private String readFileToString(File fileToRead){
 uses file logic to read the file and return a string
 Return //string
 }
+
 
 Private boolean validIndex(int index){
 
