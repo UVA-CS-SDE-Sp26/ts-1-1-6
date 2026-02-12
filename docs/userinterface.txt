@@ -20,8 +20,8 @@ up to two arguments, which determine unique feedback from the software. The foll
 
 * Double-argument execution: If the user passes two arguments, the software returns the contents of the specified file
   (first argument) according to a specified deciphering key (second argument).
-    >> java TopSecret 01 fghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcde
-        (Displays to the user the contents of filea.txt deciphered according to the key fghijkl...890abcde)
+    >> java TopSecret 01 alt_key.txt
+        (Displays to the user the contents of filea.txt deciphered according to the key specified in alt_key.txt)
 
 PSEUDOCODE
 -----
@@ -30,11 +30,11 @@ if no argument passed:
     retrieve information from Team Member C using some method like getFileList()
     print info to console and terminate
 else if one argument passed:
-    retrieve file contents from Team Member C using some method like getFileInfo(int fileNumber)
+    retrieve file contents from Team Member C using some method like handleFileRequest(String fileNumber, null)
     handle FileNotFoundException if necessary
     print info to console and terminate
 else if two arguments passed:
-    retrieve deciphered file contents from Team Member C using some method like getFileInfo(int fileNumber, String key)
+    retrieve deciphered file contents from Team Member C using some method like handleFileRequest (String fileNumber, String key)
     handle FileNotFoundException if necessary
     handle InvalidKeyException if necessary
     print info to console and terminate
