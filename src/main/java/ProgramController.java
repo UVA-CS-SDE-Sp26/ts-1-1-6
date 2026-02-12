@@ -37,7 +37,7 @@ public class ProgramController {
             if (altKey != null) {
                 usefulKey = altKey;
             } else {
-                usefulKey = fileHandler.readKey();
+                usefulKey = fileHandler.readKey("");
             }
 
             return cipher.decipher(thing, usefulKey);
