@@ -58,11 +58,15 @@ public class Cipher {
         for(int i = 0; i < input.length(); i++){
             char ch = input.charAt(i);
             Character direct = mapping.cipherToPlain.get(ch);
+            if (direct != null){
+                out.append(direct);
+                continue;
+            }
             if (Character.isLowerCase(ch)){
                 char upper = Character.toUpperCase(ch);
                 Character upperMapped = mapping.cipherToPlain.get(upper);
-                if (direct != null) {
-                    out.append(direct);
+                if (upperMapped != null) {
+                    out.append(Character.toLowerCase(upperMapped));
                     continue;
                 }
             }
