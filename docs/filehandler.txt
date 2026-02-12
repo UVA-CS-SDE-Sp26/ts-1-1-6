@@ -36,8 +36,12 @@ readFile(int Index)
 
 Filehandler
 ------------------
-listFiles(); //arrayList<Strings>
-readFile(int indexOfFile); //string
+- NamesOfFiles //arrayList<String>
+
++listFiles(); //arrayList<Strings>
++readFile(int indexOfFile); //string
++readKey(); //string //default key
+-validIndex(int index); //boolean
 ------------------
 
 Filehandler pseudocode:
@@ -78,8 +82,10 @@ else {
  }
 }
 
-
-
+Public readKey(){
+    //read cipher key at default file
+    Return String
+}
 
 Private boolean validIndex(int index){
 

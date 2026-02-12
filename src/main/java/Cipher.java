@@ -5,5 +5,8 @@ public class Cipher {
         // For now, return null or an empty string so it compiles
         return null;
     }
+    public String decipher(String cipherText){
+        return null;
+    }
 }
 
