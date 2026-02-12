@@ -12,8 +12,9 @@ class UserInterfaceTest {
         programController = mock(ProgramController.class);
         when(programController.getFileList()).thenReturn("01 filea.txt\n" + "02 fileb.txt\n" + "03 filec.txt");
         when(programController.handleFileRequest("01", null)).thenReturn("Contents of file 01.");
-        when(programController.handleFileRequest("04", null)).thenReturn("Error: Invalid file number.");
+        when(programController.handleFileRequest("04", null)).thenReturn("Invalid Index");
         when(programController.handleFileRequest("01", "alt_key.txt")).thenReturn("Deciphered contents of file 01 according to alt_key.txt.");
+        when(programController.handleFileRequest("a", null)).thenReturn("Error: Invalid file number.");
     }
 
     @Test
@@ -76,7 +77,7 @@ class UserInterfaceTest {
         UserInterface userInterface = new UserInterface(args, programController);
         String unexpected = "Error: Too many arguments. Pass up to two arguments.";
         String actual = userInterface.getReturnMessage();
-        assertNotEquals(unexpected, actual, "Passing more than two arguments should yield an error.");
+        assertEquals(unexpected, actual, "Passing more than two arguments should yield an error.");
     }
 }
 
