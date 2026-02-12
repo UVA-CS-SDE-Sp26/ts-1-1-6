@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,6 +19,13 @@ class FilehandlerTEST {
 
     // Helper data to match your requirements
     String[] testListOfFileNames = {"Document1.txt", "SuperSecretSpyDoc.txt", "123_That's_Classified!.txt", "For The President's Eyes Only.txt", "Ciphered.txt"};
+
+    private FilehandlerTEST() {
+    }
+
+    static FilehandlerTEST createFilehandlerTEST() {
+        return new FilehandlerTEST();
+    }
 
     @BeforeEach
     void setUp() throws IOException {
