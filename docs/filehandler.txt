@@ -86,6 +86,10 @@ Public readKey(){
     //read cipher key at default file
     Return String
 }
+private String readFileToString(File fileToRead){
+uses file logic to read the file and return a string
+Return //string
+}
 
 Private boolean validIndex(int index){
 

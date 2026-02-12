@@ -2,6 +2,8 @@
 *File handler
 */
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class FileHandler {
@@ -10,44 +12,47 @@ public class FileHandler {
     private Cipher cipher;
     private String fileRoot;
 
-    public FileHandler(Cipher cipher) {
-        this.cipher = cipher;
+
+
+    public FileHandler() {
         this.namesOfFiles = new ArrayList<>();
+        this.fileRoot = "";
+        //fills the namesOfFiles arrayList to avoid error about read file called first
         listFiles();
     }
 
+
+    //for setting the directory to the test resources dir.
     public FileHandler(String fileRoot) {
         this.fileRoot = fileRoot;
         this.namesOfFiles = new ArrayList<>();
+        //fills the namesOfFiles arrayList to avoid error about read file called first
         listFiles();
     }
-
-    public FileHandler(Cipher cipher, String fileRoot) {
-        this.cipher = cipher;
-        this.namesOfFiles = new ArrayList<>();
-        listFiles();
-        this.fileRoot = fileRoot;
-    }
-
-    public FileHandler() {
-        this.cipher = cipher;
-        this.namesOfFiles = new ArrayList<>();
-        listFiles();
-        this.fileRoot = fileRoot;
-    }
+    //Constructor used for testing
 
 
 
+    /**
+     * Reads the default key from /ciphers/key.txt
+     * @return String
+     */
     public String readKey(){
         String path = fileRoot + "/cipher/key.txt";
-        //Todo: add logic to read cipher key from key.txt
-        String key = "";
-        return key;
+        File keytxt = new File(path);
+        if(!keytxt.exists()){
+            return null;
+        }
+        String key = readFileToString(keytxt);
+            return key.isEmpty() ? null : key;
     }
 
+    /**
+     * Reads file names in data folder and adds them to namesOfFiles
+     * @return ArrayList<String>
+     */
     public ArrayList<String> listFiles(){
         String folderPath = fileRoot + "/data/";
-        //Todo: add logic to read the file names in data
         File folder = new File("data");
         File[] listOfFiles = folder.listFiles();
 
@@ -62,22 +67,51 @@ public class FileHandler {
         return namesOfFiles;
     }
 
-
+    /**
+     * Reads the file at the index within namesOfFiles ArrayList<>
+     */
     public String readFile(int indexOfFile){
-        if(validIndex(indexOfFile)){
-            //todo: add logic to read a specific file
-            String TextFromFileToReturn = "";
-            return TextFromFileToReturn;
+
+        if(validIndex(indexOfFile)) {
+            //finds the filename at the requested index
+            String fileName = namesOfFiles.get(indexOfFile);
+            //collects the file at fileName
+            File fileToRead = new File(fileRoot + "/data/" + fileName);
+            //collects string from fileToRead
+            return readFileToString(fileToRead);
+
+        }else {
+                return "Invalid Index";
+            }
+
         }
-        else{
-            listFiles();
-            return null;
+
+    /**
+     * Reads the string within given file
+     * @return String
+     */
+    private String readFileToString(File file){
+        StringBuilder string = new StringBuilder();
+
+        try(Scanner scanner = new Scanner(file)) {
+            //loops through lines in file and adds it to the string
+            while (scanner.hasNextLine()){
+            string.append(scanner.nextLine());
+            //adds new line to replecate lines in file
+            if (scanner.hasNextLine()) {
+                string.append("\n");
+            }
+            }
+            return string.toString().trim();
+        }catch (FileNotFoundException e){
+            return "Error: File Not Found";
         }
 
     }
+
+
     private boolean validIndex(int indexOfFile){
-        //todo: check valid index included in NamesOfFiles Array
-        return true;
+        return indexOfFile >= 0 && indexOfFile < namesOfFiles.size();
     }
 
 

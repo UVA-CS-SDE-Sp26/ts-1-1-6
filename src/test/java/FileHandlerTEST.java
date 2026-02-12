@@ -1,19 +1,11 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class FilehandlerTEST {
 
-    @Mock
-    private Cipher mockCipher;
 
     private FileHandler fileHandler;
 
@@ -30,31 +22,39 @@ class FilehandlerTEST {
     @BeforeEach
     void setUp() throws IOException {
         String testRoot = "src/test/resources/";
-        // We pass the mocked cipher into the handler
-        fileHandler = new FileHandler(mockCipher, testRoot);
+        fileHandler = new FileHandler(testRoot);
+    }
+
+
+    @Test
+    void testReadFileToStringMultiLineIntegrity() {
+        ArrayList<String> files = fileHandler.listFiles();
+        int index = files.indexOf("For The President's Eyes Only.txt");
+
+        assertTrue(index != -1, "Test file 'For The President's Eyes Only.txt' must exist in data folder");
+        //find SuperSecretSpyDoc.txt in the test resources folder
+        String result = fileHandler.readFile(index);
+
+        assertTrue(result.contains("\n"), "The reader should preserve newlines between file lines");
+
+        String expected = "Line 1 Content\nLine 2 Content\nLine 3 Content";
+        assertEquals(expected, result.trim(), "The multi-line string should match the file content exactly");
     }
 
 
     @Test
     void testWithValidIndex() {
-        // Arrange: Stub the mock to return a specific string
-        when(mockCipher.decipher("tThis is the text inside 123_That'sClassified.tx")).thenReturn("This is the text inside 123_That'sClassified.txt!");
-
-        // Index 0: 123_That'sClassified.txt
+        // Index 0: Should correspond to 123_That's_Classified!.txt
         String result = fileHandler.readFile(0);
 
-
+        String expectedRaw = "tThis is the text inside 123_That'sClassified.tx";
         assertNotNull(result);
-        assertEquals("This is the text inside 123_That'sClassified.txt!", result);
+        assertEquals(expectedRaw, result);
     }
 
     @Test
     void testWithInvalidIndex() {
-        // Act: Use an obviously out-of-bounds index
         String result = fileHandler.readFile(999);
-
-        // Assert: Based on your pseudocode, it should return "Invalid Index" or null
-        // If your code returns null, change this to assertNull(result);
         assertEquals("Invalid Index", result);
     }
     @Test
@@ -63,14 +63,10 @@ class FilehandlerTEST {
         assertEquals("Invalid Index", result);
     }
 
-    @Test
-    void testSpecialCharacterFilenameReading() {
-        int index = fileHandler.listFiles().indexOf("123_That's_Classified!.txt");
 
-        fileHandler.readFile(index);
+    /*
 
-        verify(mockCipher).decipher(contains("Classified"), anyString());
-    }
+    //removing old test cases from when FileHandler was deciphering files
     @Test
     void testDecipherReceivesCorrectInputs() {
         // 1. Arrange: Define what is actually inside your test files
@@ -83,48 +79,52 @@ class FilehandlerTEST {
         verify(mockCipher).decipher(eq(expectedContentInFile));
     }
 
+     */
+    //New test that proper text is returned
+    @Test
+    void testReadFileReturnsText() {
+        String result = fileHandler.readFile(0);
+
+
+        String expectedRaw = "tThis is the text inside 123_That'sClassified.tx";
+        assertEquals(expectedRaw, result, "FileHandler should return the undeciphered content from disk.");
+    }
+
     @Test
     void testEmptyFileContent() {
-        // Assuming "EmptyFile.txt" is in your test resources
-        // find the index of EmptyFile.txt
-        int index = fileHandler.listFiles().indexOf("EmptyFile.txt");
+        ArrayList<String> files = fileHandler.listFiles();
+        int index = files.indexOf("EmptyFile.txt");
 
-        fileHandler.readFile(index);
+        // Ensure the file was actually found in the list first
+        assertTrue(index != -1, "EmptyFile.txt must exist in src/test/resources/data/ for this test");
 
-        // Verify that it passes an empty string, not null, to the cipher
-        verify(mockCipher).decipher(eq(""), anyString());
+        String result = fileHandler.readFile(index);
+
+        // This proves your readFileToString helper handled the empty scanner correctly.
+        assertEquals("", result, "FileHandler should return an empty string for empty files.");
     }
 
-    //tests what happens if the file name in the arrayList<> coresponds to a file that's been deleted
-    @Test
-    void testReadFileThrowsException() {
-        // Create a handler with a fake path to force an IOException in the try block
-        FileHandler brokenHandler = new FileHandler(mockCipher, "non/existent/path");
 
-        // We need to manually add a name so validIndex returns true,
-        // but the actual file read fails.
-        // (Note: If NamesOfFiles is private, you might just test
-        // the behavior when the folder path is wrong during listFiles)
-
-        String result = brokenHandler.readFile(0);
-        assertTrue(result.contains("Error")); // Asserts the catch block was hit
-    }
 
     @Test
     void firstFileInList() {
-        // Verify index 0 is handled correctly
-        when(mockCipher.decipher("tThis is the text inside 123_That'sClassified.tx")).thenReturn("This is the text inside 123_That'sClassified.txt!");
-        assertEquals("This is the text inside 123_That'sClassified.txt!", fileHandler.readFile(0));
+        String result = fileHandler.readFile(0);
+
+        String expectedRawContent = "tThis is the text inside 123_That'sClassified.tx";
+
+        assertNotNull(result, "The result should not be null for a valid file index");
+        assertEquals(expectedRawContent, result, "FileHandler should return the raw ciphered text for index 0");
     }
+
     @Test
     void lastFileInList() {
         ArrayList<String> files = fileHandler.listFiles();
         if (!files.isEmpty()) {
             int lastIndex = files.size() - 1;
+            String result = fileHandler.readFile(lastIndex);
 
-            fileHandler.readFile(lastIndex);
-
-            verify(mockCipher).decipher(eq("elast fil"), anyString());
+            // Matches the content of your last test file
+            assertEquals("elast fil", result);
         }
     }
 
@@ -147,27 +147,49 @@ class FilehandlerTEST {
         assertNotNull(files);
     }
 
+
     @Test
-    void readFile() {
-        //ensure the decipher method is actually called
-        fileHandler.readFile(0);
-        // Verify that the cipher's decipher method was invoked exactly once
-        verify(mockCipher, times(1)).decipher(anyString(), anyString());
+    void testReadKeyReturnsNullOnMissingFile() {
+        FileHandler invalidPath = new FileHandler("invalid/path/");
+
+        String result = invalidPath.readKey();
+        assertNull(result, "Should return null for missing files so the Cipher doesn't use an error message as a key.");
     }
 
     @Test
     void readKey() {
-        //runs the readKey() function
         String key = fileHandler.readKey();
 
-        //Tests that key isn't empty
         assertNotNull(key);
-        assertFalse(key.isEmpty(), "The test key file should not be empty");
+        assertFalse(key.isEmpty());
 
-        // The expected key from the resources/ciphers/key.txt
-        String expectedKey = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" +
+        // IMPORTANT: Note the \n between the two lines to match your teammate's split("\\R")
+        String expectedKey = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890\n" +
                 "bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890a";
-        //tests that key is the same as the expected output
-        assertEquals(expectedKey, key, "Key should match the test resource format exactly");
+
+        // We use .strip() or .trim() depending on your FileHandler's readFileToString implementation
+        assertEquals(expectedKey.trim(), key.trim(), "Key should match the test resource format exactly");
     }
+
+    //Updated test to match with cipher class's formating
+    @Test
+    void testReadKeyFormatForCipherCompatibility() {
+        String key = fileHandler.readKey();
+
+        assertNotNull(key, "readKey() should return null if missing, not crash");
+
+        //matched test to Cipher class's check for line breaks
+        String[] lines = key.split("\\R");
+        //cipher class is expecting 2 lines
+        assertEquals(2, lines.length, "Key must have exactly two lines for the Cipher to work");
+
+      //cipher throws an error if the lines are different lengths
+        assertEquals(lines[0].length(), lines[1].length(),
+                "The plain text line and cipher line in key.txt must be the same length");
+        //checks the first line with the test file's key
+        assertTrue(lines[0].contains("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), "First line should contain the alphabet sequence");
+    }
+
+
+
 }
