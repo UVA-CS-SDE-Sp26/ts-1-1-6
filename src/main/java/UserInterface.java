@@ -5,6 +5,7 @@ public class UserInterface {
 
     public UserInterface(String[] args, ProgramController programController) {
         this.args = args;
+        this.programController = programController;
     }
 
     public String getReturnMessage() {
