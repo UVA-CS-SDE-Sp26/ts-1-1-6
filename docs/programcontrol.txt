@@ -1,0 +1,54 @@
+Description of goal:
+
+The goal of this class is to essentially connect the command line to the file handler, request file contents, and return readable text.
+
+When no arguments are input, the user interface should call a function within this class that lists all possible files that can be put in as the input as the following format:
+01 filea.txt
+02 fileb.txt
+03 filec.txt
+
+
+When 1 argument is passed, it runs a function that returns the contents of the file that the input has the index of using the default deciphering key
+
+When 2 arguments are passed, it runs the same function, but uses the second input as the deciphering key.
+
+Functions this should include:
+public String getFileList()
+public String handleFileRequest(String fileNumStr, String altKey)
+
+
+Testing Strategy:
+For the getFileList():
+Testing if the format of the list displayed is as expected by Pat (starting with 01, 02, 03...) -- using '.startswith('01')' to see if the list started with the correct format
+
+For the handleFileRequest function:
+1. Checks if the handleFileRequest returns the expected error if it isn't given a number by passing in 'abc' as the index for the file, and expecting 'Error: Invalid file number.'
+2. Tests handleFileRequest with a key, and makes sure that it doesn't return any errors and actually gives an output
+3. Tests handleFileRequest without an alternate key(if there is only 1 parameter), and makes sure it returns a valid output
+
+Pseudocode:
+task 1: file listing (getfilelist)
+- check storage: ask filehandler for all available files
+- check status:
+    - if no files exist, return "no files found"
+    - if files exist, start a loop to format them
+- formatting:
+    - assign a number to each file (starting at 1)
+    - combine the number and filename into a single list string
+- result: return the final formatted string
+
+task 2: file processing (handlefilerequest)
+- input check:
+    - convert the user's input string into an integer
+    - subtract 1 from that number to match computer indexing (0-based)
+- data retrieval:
+    - fetch the content from the filehandler using the index
+    - if the index is invalid, return the error message
+- key selection:
+    - if an override key (altKey) is provided, use it
+    - if no override exists, pull the default key from the handler
+- decryption:
+    - send the file content and the chosen key to the cipher
+    - return the final decrypted result
+-errors
+    - catch errors and return
