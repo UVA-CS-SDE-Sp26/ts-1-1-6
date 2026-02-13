@@ -49,7 +49,7 @@ class FilehandlerTEST {
         // Index 0: Should correspond to 123_That's_Classified!.txt
         String result = fileHandler.readFile(0);
 
-        String expectedRaw = "tThis is the text inside 123_That'sClassified.tx";
+        String expectedRaw = "This is the text inside 123_That'sClassified.txt";
         assertNotNull(result);
         assertEquals(expectedRaw, result);
     }
@@ -88,7 +88,7 @@ class FilehandlerTEST {
         String result = fileHandler.readFile(0);
 
 
-        String expectedRaw = "tThis is the text inside 123_That'sClassified.tx";
+        String expectedRaw = "This is the text inside 123_That'sClassified.txt";
         assertEquals(expectedRaw, result, "FileHandler should return the undeciphered content from disk.");
     }
 
@@ -112,7 +112,7 @@ class FilehandlerTEST {
     void firstFileInList() {
         String result = fileHandler.readFile(0);
 
-        String expectedRawContent = "tThis is the text inside 123_That'sClassified.tx";
+        String expectedRawContent = "This is the text inside 123_That'sClassified.txt";
 
         assertNotNull(result, "The result should not be null for a valid file index");
         assertEquals(expectedRawContent, result, "FileHandler should return the raw ciphered text for index 0");

@@ -1,8 +1,15 @@
-Description of goal:
+TopSecret FileHandler
+-----
+
+02/13/2026
+Thomas Van Pelt (B)
 
 
-The program should expect files in a folder named data (in the same directory of the program, or in the root of your project folder.) When a request for a file is received, this part of the program will return the file contents. This part of the program should handle all the direct access to files.
 
+
+File handler should expect files in a folder named data (in the same directory of the program, or in the root of your project folder.)
+When a request for a file is received, this part of the program will return the file contents.
+This part of the program should handle all the direct access to files.
 
 
 Goals:
@@ -13,15 +20,14 @@ Goals:
 
 		Return:
 			ArrayList<String>
+
+
 listFiles()
 	Function: When run return the list of file names in the data folder.
 		○ Read the file names
 		○ Add the file names to an ArrayList<String>
 		○ Return the arraylist of names
 	Return ArrayList<String>
-
-
-
 
 readFile(int Index)
 	Function: Take in index of file you want to print from the array of names.
@@ -34,19 +40,47 @@ readFile(int Index)
 		Return:
 			String
 
-Filehandler
+readKey(String path)
+Function: Take in index of key file you want and returns the two lines of the Cipher ke.
+		○ Take in file from Ciphers folder in root
+
+		○ Send String of Filename in Ciphers folder
+
+		○ Return the two line string key
+
+		Return:
+			String
+
+
+Filehandler UML Diagram
+------------------
+fileRoot
 ------------------
 - NamesOfFiles //arrayList<String>
-
+------------------
 +listFiles(); //arrayList<Strings>
 +readFile(int indexOfFile); //string
-+readKey(String path); //string
++readKey(String name); //string
 -validIndex(int index); //boolean
+-readFileToString(File file) //string
 ------------------
 
 Filehandler pseudocode:
 
+Call List files to get a list of file names in the data folder
 
+Call readFile at the index of the arrayList you want to get the string from
+
+Call readKey(String name) to get the key from the file named name
+
+Valid index will check the index for readFile
+
+readFileToString takes in a file and returns the text in that file as a string Helper method for readKey and readFile
+
+
+
+
+filehandler basic initial structure:
 public  class FileHandler {
 
 
