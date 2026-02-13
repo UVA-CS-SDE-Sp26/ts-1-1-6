@@ -8,7 +8,5 @@ public class TopSecret {
         ProgramController programController = new ProgramController();
         UserInterface userInterface = new UserInterface(args, programController);
         System.out.println(userInterface.getReturnMessage());
-
-
     }
 }

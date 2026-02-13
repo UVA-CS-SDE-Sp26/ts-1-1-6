@@ -125,7 +125,7 @@ class UserInterfaceTest {
     void getReturnMessageTwoArgumentsIntegrated() {
         String[] args = {"01", "alt_key.txt"};
         UserInterface userInterface = new UserInterface(args, trueProgramController);
-        String expected = "Deciphered contents of file 01 according to alt_key.txt.";
+        String expected = "Tjku ku vjg vgzv kpukfg 123_Tjcv'uCncuukhkgf.vzv!";
         String actual = userInterface.getReturnMessage();
         assertEquals(expected, actual, "Passing two arguments should decipher file contents according to alternate key.");
     }
