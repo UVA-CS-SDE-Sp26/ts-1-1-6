@@ -3,7 +3,10 @@
 */
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
 import java.util.*;
+
+
 
 public class FileHandler {
 
@@ -15,8 +18,22 @@ public class FileHandler {
 
     public FileHandler() {
         this.namesOfFiles = new ArrayList<>();
-        this.fileRoot = System.getProperty("user.dir");
-        //fills the namesOfFiles arrayList to avoid error about read file called first
+        // Get the base directory where the terminal is currently sitting
+        Path current = Path.of("").toAbsolutePath().normalize();
+        File dataDir = current.resolve("data").toFile();
+
+        // If current folder doesn't contain 'data', walk upward
+        while (!dataDir.exists() || !dataDir.isDirectory()) {
+            current = current.getParent();
+            if (current == null) {
+                throw new IllegalStateException("Project root containing 'data' not found.");
+            }
+            dataDir = current.resolve("data").toFile();
+        }
+        fileRoot = current.toString();
+
+
+
         listFiles();
     }
 
