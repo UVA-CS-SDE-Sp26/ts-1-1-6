@@ -23,7 +23,18 @@ up to two arguments, which determine unique feedback from the software. The foll
     >> java TopSecret 01 alt_key.txt
         (Displays to the user the contents of filea.txt deciphered according to the key specified in alt_key.txt)
 
-PSEUDOCODE
+UML DIAGRAM
+----
+UserInterface
+---------
+- args: String[]
+- programController: ProgramController
+---------
++ getReturnMessage(): String
+---------
+
+
+PSEUDOCODE (getReturnMessage)
 -----
 
 if no argument passed:
@@ -31,12 +42,9 @@ if no argument passed:
     print info to console and terminate
 else if one argument passed:
     retrieve file contents from Team Member C using some method like handleFileRequest(String fileNumber, null)
-    handle FileNotFoundException if necessary
     print info to console and terminate
 else if two arguments passed:
     retrieve deciphered file contents from Team Member C using some method like handleFileRequest (String fileNumber, String key)
-    handle FileNotFoundException if necessary
-    handle InvalidKeyException if necessary
     print info to console and terminate
 else:
     Display an error message and terminate
