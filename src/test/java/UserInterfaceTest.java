@@ -89,7 +89,7 @@ class UserInterfaceTest {
     void getReturnMessageNoArgsIntegrated() {
         String[] args = {};
         UserInterface userInterface = new UserInterface(args, trueProgramController);
-        String expected = "01 123_That'sClassified.txt\n" + "02 Ciphered.txt\n" + "03 For The President's Eyes Only.txt\n" + "04 Document1.txt\n" + "05 SuperSecretSpyDoc.txt\n";
+        String expected = "01 123_That'sClassified.txt\n" + "02 CustomCipher.txt\n" + "03 Ciphered.txt\n" + "04 For The President's Eyes Only.txt\n" + "05 Document1.txt\n" + "06 SuperSecretSpyDoc.txt\n";
         String actual = userInterface.getReturnMessage();
         assertEquals(expected, actual, "Passing no arguments should yield a list of files");
     }
@@ -100,7 +100,7 @@ class UserInterfaceTest {
         UserInterface userInterface = new UserInterface(args, trueProgramController);
         String expected = "Sghr hr sgd sdws hmrhcd Z12_Sg0s'rBk0rrhehdc.sws!";
         String actual = userInterface.getReturnMessage();
-        assertEquals(expected, actual, "Passing one valid argument should yield file contents.");
+        assertEquals(expected, actual, "Passing one valid argument should yield file contents deciphered according to the default key.");
     }
 
     @Test
@@ -119,6 +119,15 @@ class UserInterfaceTest {
         String expected = "Error: Invalid file number.";
         String actual = userInterface.getReturnMessage();
         assertEquals(expected, actual, "Passing an invalid number should yield an error.");
+    }
+
+    @Test
+    void getReturnMessageTwoArgumentsIntegrated() {
+        String[] args = {"01", "alt_key.txt"};
+        UserInterface userInterface = new UserInterface(args, trueProgramController);
+        String expected = "Deciphered contents of file 01 according to alt_key.txt.";
+        String actual = userInterface.getReturnMessage();
+        assertEquals(expected, actual, "Passing two arguments should decipher file contents according to alternate key.");
     }
 
     @Test
