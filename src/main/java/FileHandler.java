@@ -59,7 +59,7 @@ public class FileHandler {
             path = fileRoot + "/ciphers/key.txt";
         }
 
-        File keytxt = new File(path);
+        File keytxt = new File(fileRoot + "/ciphers/" + path);
         if(!keytxt.exists()){
             return null;
         }
