@@ -55,8 +55,8 @@ public class FileHandler {
      * @return String
      */
     public String readKey(String path){
-        if(path.isEmpty()){
-            path = fileRoot + "/ciphers/key.txt";
+        if(path.isEmpty()|path.isBlank()){
+            path = "key.txt";
         }
 
         File keytxt = new File(fileRoot + "/ciphers/" + path);

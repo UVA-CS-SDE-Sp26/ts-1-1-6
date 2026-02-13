@@ -35,7 +35,7 @@ public class ProgramController {
 
             String usefulKey;
             if (altKey != null) {
-                usefulKey = altKey;
+                usefulKey = fileHandler.readKey(altKey);
             } else {
                 usefulKey = fileHandler.readKey("");
             }
